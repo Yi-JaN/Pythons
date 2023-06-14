@@ -1,0 +1,52 @@
+#判斷此年份是否為閏年以及該月份是幾天(需搭配年份)
+year=int(input()) #先輸入年份
+month=int(input())#輸入月份
+for i in range(year,year+1,1) : #先把年份丟進for判斷, year<year+1 每次循環+1
+    if i%400==0 :   #如果現在的i(year)是％400==0 那就是閏年
+        print("The year is bissextile") #顯示閏年
+    elif i%100==0 : #如果％400餘數不等於0,那就％100,如果餘數==0就丟這
+        print("The year is average year") #顯示非閏年
+    elif i%4==0 :  #上述兩個都不行就來到這%4,如果餘數是0,那就丟這
+        print("The year is bissextile")   #顯示閏年
+    else :  #％400 %100 %4 都不符合就丟else
+        print("The year is average year") #顯示非閏年
+if month==1 : #判斷年份完畢後接下來這裡開始就判斷此年份的月份天數(需搭配閏年非閏年判斷)
+    print("31 days")     #閏年跟非閏年差距就是2月,所以"其他月不會影響",所以2月部份在
+elif month==2 :            #搭配年份丟進去判斷此月是閏年(29days)或是非閏年(28 days)
+    if year%400==0 :
+        print("29 days")
+    elif year%100==0 :
+        print("28 days")
+    elif year%4==0 :
+        print("29 days")
+    else :
+        print("28 days")
+elif month==3 :
+    print("31 days")
+elif month==4 :
+    print("30 days")
+elif month==5 :
+    print("31 days")
+elif month==6 :
+    print("30 days")
+elif month==7 :
+    print("31 days")
+elif month==8 :
+    print("31 days")
+elif month==9 :
+    print("30 days")
+elif month==10 :
+    print("31 days")
+elif month==11 :
+    print("30 days")
+elif month==12 :
+    print("31 days")        
+
+#補充:年份的閏年跟非閏年判斷->閏年規範是從400年開始,每400為一閏,每百年(100)不閏,而4年一閏
+                         #所以我if判斷由上至下判斷時是先從大年份開始判斷再慢慢到小年份
+                         #判斷,所以由上至下先400 100再來4 最後上述都不符合才是else(其他)
+
+#輸入->2000                    2000                    2017
+#     2                       3                        2 
+#輸出->The year is bissextile The year is bissextile   The year is average year
+#     29 days                 31 days                  28 days
