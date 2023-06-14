@@ -1,0 +1,53 @@
+#各位數和排序
+n=int(input()) #看要裝幾個正整數
+data=[] #此一維陣列是裝正整數
+sumdata=[] #此一維陣列是裝正整數的總和值,依照正整數的位置去裝
+summ=0 #此summ是用來拿data一維陣列的值,之後用while迴圈取此一維陣列裡的值的總和值
+for i1 in range(0,n,1) : #這是data裝正整數的迴圈,陣列開頭第一個值必為0,然後看要裝幾個(n)當做循環
+    data+=[int(input())] #每循環一次丟一個自己取的正整數推給他->(data[])
+aa=len(data) #看我data一維陣列裡有幾個值丟進len算長度值給aa
+for i2 in range(0,aa,1) : #把我aa丟進for i2當做循環,並且取目前i2值當做取data一維陣列裡的正整數
+    c=0 #每循環來到這邊第一行c就等於0,c的作用是把算好的總和值推給sumdata[],1個1個推
+    summ=data[i2] #summ作用是取data[i2](目前i2的位置值)給summ汰舊換新
+    while summ>=1 : #拿到值之後丟入while迴圈跑到不是>=1就不用在跑了
+          c+=(summ%10) #c就去+目前此summ拿到的data一維陣列的值的分割位數值
+          summ=summ//10 #每分割完一個位數就來到這邊"//",意思是summ除以10取商數
+    sumdata+=[c]  #之後c的+完畢之後就推給sumdata一維陣列,把他裝進去,之後循環for i2 然後c在歸0,之後在做上述一樣動作
+for i in range(0,aa,1) : #for i當做外圈 看我aa長度值是多少,外圈就循環幾次,每次循環外圈盡可能帶動內圈for j排出完美
+    for j in range(0,aa-1,1) :#for j當做內圈                   #狀態的氣泡排序(此氣泡排序是由小到大)
+        if sumdata[j]==sumdata[j+1] and data[j]>data[j+1] : 
+            a=sumdata[j]
+            sumdata[j]=sumdata[j+1]
+            sumdata[j+1]=a
+            b=data[j]
+            data[j]=data[j+1]
+            data[j+1]=b
+        elif sumdata[j]>sumdata[j+1] :
+            a=sumdata[j]
+            sumdata[j]=sumdata[j+1]
+            sumdata[j+1]=a
+            b=data[j]
+            data[j]=data[j+1]
+            data[j+1]=b            
+for k in range(0,aa,1) : #這裡是先列印data正整數值,而data來到這邊已經變完美狀態的氣泡排序
+    print(data[k],end=" ") #之後每循環一次列印目前k位置值的data正整數值
+print() #OK後換下一行,換列印總和值
+for k1 in range(0,aa,1) : #這邊換列印sumdata的總和值,而sumdata來到這邊已經變完美狀態的氣泡排序
+    print(sumdata[k1],end=" ") #之後每循環一次列印目前k1位置值的sumdata分割位數總和值
+print() #OK後換下一行,就OK了          
+#3                  4                      4
+#9128 3128 5122     1725 3821 2011 1428    6531 7113 1096 2185
+#A:5122 3128 9128   2011 3821 1428 1725    7113 6531 1096 2185
+#A:10 14 20         4 14 15 15             12 15 16 16 
+    
+    
+#補充1-1:if sumdata[j]==sumdata[j+1] and data[j]>data[j+1]意思-> 因為假設data"他們"自己得出來的總和值假設一樣,然後如果正整數他比下一個
+#       正整數值還要大那就丟進來
+#補充1-2:進來之後,雖然雙方的總和值都一樣可以不用改,但是我改的原因是因為,既然他自己生出來的總和值,如果假設自己位置被對調,那麼這總和值
+#       也要跟著這正整數值對調到一樣的位置,所以才會符合進入之後,總和跟正整數一起對調!
+#補充2-1:elif(sumdata[j]>sumdata[j+1])意思-> 如果我面前sumdata[j]位置總和值大於下一個sumdata j+1的位置總和值,那就丟進去
+#補充2-2:丟進去之後一樣泡沫排序(氣泡排序) sumdata目前[j]的總和值先丟給a,然後sumdata j+1的總和值丟到sumdata[j]取代上去,之後sumdata j+1就把原本
+#       sumdata[j]總和值丟給a的值丟給他,所以sumdata j+1=a,這樣慢慢就形成一種泡沫排序(氣泡排序)的道理,之後data正整數值也是一樣的道理,
+#       因為假設data[j]的正整數值的總和值大於下一個data j+1正整數值的總和值,所以既然他自己生出來的總和值,假設自己正整數值位置做對調,那麼
+#       這總和值也要跟著這正整數值對調到一樣的位置! 所以data[j]也一樣做泡沫排序(氣泡排序) ,一開始總和先對調,之後正整數值也要跟著總和值
+#       做對調 
